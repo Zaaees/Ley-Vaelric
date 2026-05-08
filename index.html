@@ -1,0 +1,1042 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Ley Vaelric-Farlier — L'Apocryphe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;500;600&family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e0c0b;
+    --bg-2:#181412;
+    --paper:#1c1816;
+    --ink:#e9e0cf;
+    --ink-soft:#b8ad97;
+    --ink-dim:#7d7361;
+    --gold:#c9a961;
+    --gold-soft:#8a7340;
+    --blood:#8b2635;
+    --steel:#6b8aa8;
+    --rule: rgba(201,169,97,.22);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:"Cormorant Garamond", Georgia, serif;
+    font-weight:400;
+    font-size:19px;
+    line-height:1.75;
+    color:var(--ink);
+    background:
+      radial-gradient(1200px 800px at 80% -10%, rgba(139,38,53,.08), transparent 60%),
+      radial-gradient(900px 700px at -10% 30%, rgba(107,138,168,.07), transparent 55%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+    background-attachment: fixed;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='2' seed='5' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.9 0 0 0 0 0.85 0 0 0 0 0.7 0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    mix-blend-mode:overlay;
+    opacity:.35;
+  }
+
+  /* ------- Layout ------- */
+  .wrap{display:grid; grid-template-columns: 280px 1fr; gap:0; max-width:1400px; margin:0 auto; position:relative; z-index:1;}
+  aside.nav{
+    position:sticky; top:0; align-self:start;
+    height:100vh; padding:48px 28px;
+    border-right:1px solid var(--rule);
+    overflow-y:auto;
+  }
+  main{padding:80px clamp(28px, 6vw, 96px); min-width:0}
+
+  /* ------- Hero ------- */
+  .hero{
+    min-height:90vh;
+    display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:80px; margin-bottom:60px;
+    position:relative;
+  }
+  .hero .eye{
+    width:min(180px, 30vw); aspect-ratio:1; opacity:.85;
+    margin:0 0 28px -8px; display:block;
+  }
+  .hero .kicker{
+    font-family:"Cinzel", serif; letter-spacing:.5em; font-size:.78rem;
+    color:var(--gold); text-transform:uppercase; margin-bottom:28px;
+  }
+  .hero h1{
+    font-family:"Cinzel", serif; font-weight:500;
+    font-size: clamp(2.6rem, 6vw, 5rem);
+    margin:0 0 .2em; line-height:1.05; color:var(--ink);
+    text-shadow: 0 0 40px rgba(201,169,97,.08);
+  }
+  .hero .epithet{
+    font-family:"Cormorant Garamond", serif; font-style:italic; font-weight:400;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    color:var(--gold); margin:0 0 1.4em;
+  }
+  .hero .epigraph{
+    max-width:640px; font-style:italic; color:var(--ink-soft);
+    border-left:1px solid var(--gold-soft); padding-left:20px; font-size:1.1rem;
+  }
+  .hero .epigraph cite{display:block; font-style:normal; font-size:.85rem; color:var(--ink-dim); letter-spacing:.2em; text-transform:uppercase; margin-top:14px;}
+
+  /* ------- Nav ------- */
+  .nav .brand{
+    font-family:"Cinzel", serif; font-size:.85rem; letter-spacing:.35em;
+    color:var(--gold); padding-bottom:24px; border-bottom:1px solid var(--rule);
+    margin-bottom:24px; text-transform:uppercase;
+  }
+  .nav ol{list-style:none; margin:0; padding:0; counter-reset:sec;}
+  .nav li{counter-increment:sec; margin:6px 0;}
+  .nav a{
+    display:block; text-decoration:none; color:var(--ink-soft);
+    padding:6px 0 6px 38px; position:relative;
+    font-size:1rem; transition:color .25s, transform .25s;
+  }
+  .nav a::before{
+    content: counter(sec, upper-roman) ".";
+    position:absolute; left:0; top:6px;
+    font-family:"Cinzel", serif; font-size:.75rem; letter-spacing:.1em;
+    color:var(--gold-soft);
+  }
+  .nav a:hover{color:var(--gold); transform:translateX(2px)}
+  .nav a.active{color:var(--gold)}
+  .nav .sub{list-style:none; padding:2px 0 6px 38px; margin:0;}
+  .nav .sub li{counter-increment:none; margin:2px 0;}
+  .nav .sub a{padding:3px 0; font-size:.88rem; color:var(--ink-dim);}
+  .nav .sub a::before{content:""; }
+  .nav .sub a:hover{color:var(--ink-soft)}
+  .nav .seal{
+    margin-top:36px; padding-top:24px; border-top:1px solid var(--rule);
+    font-size:.78rem; color:var(--ink-dim); letter-spacing:.18em; text-transform:uppercase;
+    text-align:center;
+  }
+
+  /* ------- Section ------- */
+  section{padding:60px 0 40px; max-width:780px;}
+  section + section{border-top:1px solid var(--rule);}
+  section > .label{
+    font-family:"Cinzel", serif; letter-spacing:.45em; font-size:.72rem;
+    color:var(--gold); text-transform:uppercase; margin-bottom:14px;
+  }
+  section > h2{
+    font-family:"Cinzel", serif; font-weight:500;
+    font-size: clamp(1.8rem, 3.6vw, 2.6rem); margin:0 0 .8em;
+    color:var(--ink);
+  }
+  section > h2::after{
+    content:""; display:block; width:80px; height:1px;
+    background:linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+    margin-top:18px;
+  }
+
+  h3.chapter{
+    font-family:"Cinzel", serif; font-weight:400; font-size:1.1rem;
+    letter-spacing:.25em; text-transform:uppercase; color:var(--gold);
+    margin:64px 0 28px; text-align:center; position:relative;
+  }
+  h3.chapter::before, h3.chapter::after{
+    content:"▪"; color:var(--gold-soft); margin:0 14px; font-size:.7rem; vertical-align:middle;
+  }
+
+  p{margin:0 0 1.1em; text-align:justify; hyphens:auto;}
+
+  /* ------- Three voices ------- */
+
+  /* Dialogue: gilded blockquote */
+  .dialogue{
+    margin:1.4em 0; padding:14px 22px;
+    border-left:2px solid var(--gold);
+    background:linear-gradient(90deg, rgba(201,169,97,.06), transparent 60%);
+    color:var(--ink);
+    font-family:"Cormorant Garamond", serif;
+    font-size:1.08em;
+  }
+  .dialogue p{margin:0; text-align:left;}
+  .dialogue p + p{margin-top:.4em;}
+
+  /* Pensée intérieure : alignée à gauche, italique bleutée, sertie d'astérismes */
+  .thought{
+    margin:1.4em 0; padding:0;
+    text-align:left;
+    font-style:italic;
+    color:#9bb3c9;
+    font-size:1.05em;
+    letter-spacing:.01em;
+    text-shadow:0 0 18px rgba(107,138,168,.18);
+    position:relative;
+  }
+  .thought::before{
+    content:"⁂"; display:inline; color:var(--steel); opacity:.55;
+    font-size:.85em; margin-right:.6em; font-style:normal;
+  }
+  .thought p{margin:0; text-align:left; display:inline;}
+
+  /* Carnet: childlike handwriting on inset paper */
+  .carnet{
+    margin:2em 0; padding:24px 28px 24px 60px;
+    background:
+      linear-gradient(180deg, rgba(58,46,36,.55), rgba(40,30,22,.6));
+    border:1px solid rgba(201,169,97,.18);
+    border-radius:2px;
+    box-shadow:
+      inset 0 0 60px rgba(0,0,0,.35),
+      0 8px 30px rgba(0,0,0,.4);
+    position:relative;
+    font-family:"Caveat", cursive;
+    font-size:1.35rem; line-height:1.55;
+    color:#d8c9a3;
+    transform:rotate(-.25deg);
+  }
+  .carnet::before{
+    content:""; position:absolute; left:42px; top:0; bottom:0;
+    width:1px; background:rgba(139,38,53,.55);
+  }
+  .carnet::after{
+    content:"Carnet de Ley"; position:absolute; top:-10px; left:24px;
+    font-family:"Cinzel", serif; font-size:.62rem; letter-spacing:.3em;
+    text-transform:uppercase; color:var(--gold); background:var(--bg-2);
+    padding:2px 10px;
+  }
+  .carnet p{margin:0 0 .5em; text-align:left; hyphens:none;}
+  .carnet p:last-child{margin-bottom:0}
+
+  /* ------- Identité fiche ------- */
+  .id-grid{
+    display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap:18px 36px; margin-top:24px;
+  }
+  .id-grid .field{
+    border-bottom:1px solid var(--rule); padding:10px 0;
+  }
+  .id-grid .field .k{
+    display:block; font-family:"Cinzel", serif; font-size:.7rem;
+    letter-spacing:.25em; text-transform:uppercase; color:var(--gold-soft);
+    margin-bottom:4px;
+  }
+  .id-grid .field .v{ font-size:1.1rem; color:var(--ink); }
+  .id-grid .field .v small{display:block; font-size:.85rem; color:var(--ink-soft); font-style:italic; margin-top:4px; line-height:1.4}
+
+  /* ------- Capacités ------- */
+  .aspect-card{
+    margin:30px 0; padding:30px 34px;
+    border:1px solid var(--rule); border-radius:2px;
+    background:linear-gradient(180deg, rgba(107,138,168,.05), rgba(0,0,0,.2));
+    position:relative;
+  }
+  .aspect-card h4{
+    font-family:"Cinzel", serif; font-weight:500; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--gold); margin:0 0 .8em;
+    font-size:.95rem;
+  }
+  .needles{
+    display:flex; gap:6px; margin:18px 0 22px;
+  }
+  .needles span{
+    flex:1; height:2px;
+    background:linear-gradient(90deg, transparent, var(--steel) 30%, #a9c4e0 50%, var(--steel) 70%, transparent);
+    box-shadow:0 0 6px rgba(107,138,168,.4);
+  }
+  .example{
+    margin:14px 0; padding:14px 18px;
+    border-left:1px dashed var(--gold-soft);
+    color:var(--ink-soft); font-style:italic;
+  }
+  .example b{font-style:normal; color:var(--gold); letter-spacing:.1em; font-family:"Cinzel", serif; font-size:.78rem; text-transform:uppercase; display:block; margin-bottom:4px;}
+
+  /* ------- Mini-player flottant ------- */
+  .floating-player{
+    position:fixed;
+    right:20px; bottom:20px;
+    z-index:50;
+    width:280px;
+    background:linear-gradient(180deg, #1c1612 0%, #110e0c 100%);
+    border:1px solid var(--gold-soft);
+    box-shadow:
+      0 18px 40px rgba(0,0,0,.6),
+      0 0 0 1px rgba(0,0,0,.5);
+    transition:transform .35s ease;
+    user-select:none;
+  }
+  .floating-player .fp-head{
+    display:flex; align-items:center; gap:10px;
+    padding:8px 10px 8px 14px;
+    border-bottom:1px solid var(--rule);
+  }
+  .floating-player .fp-head .dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--gold-soft);
+    transition:background .25s, box-shadow .25s;
+  }
+  .floating-player.playing .fp-head .dot{
+    background:var(--gold);
+    box-shadow:0 0 10px var(--gold);
+    animation:pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:.55; transform:scale(.9)}
+    50%{opacity:1; transform:scale(1.2)}
+  }
+  .floating-player .fp-title{
+    flex:1; min-width:0;
+    font-family:"Cinzel", serif; font-size:.72rem;
+    letter-spacing:.28em; text-transform:uppercase; color:var(--gold);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .floating-player .fp-controls{
+    display:flex; align-items:center; gap:14px;
+    padding:14px 16px;
+  }
+  .fp-btn{
+    width:42px; height:42px;
+    border-radius:50%;
+    background:var(--gold);
+    color:#0e0c0b;
+    border:none;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .15s, background .2s;
+    flex-shrink:0;
+  }
+  .fp-btn:hover{background:#e0c07a; transform:scale(1.05)}
+  .fp-btn svg{width:18px; height:18px;}
+  .fp-time{
+    flex:1; min-width:0;
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .fp-progress{
+    width:100%; height:3px;
+    background:rgba(201,169,97,.18);
+    cursor:pointer; position:relative;
+  }
+  .fp-progress-fill{
+    position:absolute; left:0; top:0; bottom:0;
+    background:var(--gold);
+    width:0%;
+    box-shadow:0 0 6px rgba(201,169,97,.5);
+  }
+  .fp-times{
+    display:flex; justify-content:space-between;
+    font-size:.7rem; color:var(--ink-dim);
+    font-variant-numeric:tabular-nums;
+    letter-spacing:.05em;
+  }
+  .fp-loop{
+    background:none; border:1px solid var(--gold-soft); color:var(--gold-soft);
+    width:30px; height:30px; border-radius:50%;
+    cursor:pointer; display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    transition:color .2s, border-color .2s, background .2s;
+  }
+  .fp-loop.active{color:var(--gold); border-color:var(--gold); background:rgba(201,169,97,.1)}
+  .fp-loop svg{width:14px; height:14px;}
+
+  .fp-volume{
+    display:flex; align-items:center; gap:10px;
+    padding:0 16px 14px;
+    color:var(--ink-dim);
+  }
+  .fp-volume svg{width:14px; height:14px; flex-shrink:0;}
+  .fp-volume input[type=range]{
+    flex:1; height:3px;
+    -webkit-appearance:none; appearance:none;
+    background:rgba(201,169,97,.18);
+    outline:none; cursor:pointer;
+    border-radius:2px;
+  }
+  .fp-volume input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 6px rgba(201,169,97,.5);
+    cursor:pointer;
+  }
+  .fp-volume input[type=range]::-moz-range-thumb{
+    width:12px; height:12px; border-radius:50%;
+    background:var(--gold); border:none;
+    box-shadow:0 0 6px rgba(201,169,97,.5);
+    cursor:pointer;
+  }
+  @media (max-width:700px){
+    .floating-player{width:240px; right:10px; bottom:10px;}
+  }
+
+  /* ------- Portrait ------- */
+  .portrait{
+    float:right;
+    width:min(280px, 45%);
+    margin:0 0 18px 28px;
+    padding:14px 14px 18px;
+    background:linear-gradient(180deg, #f1e7d2 0%, #e3d4b3 100%);
+    border:1px solid var(--gold-soft);
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,.4) inset,
+      0 18px 40px rgba(0,0,0,.55),
+      0 4px 10px rgba(0,0,0,.4);
+    position:relative;
+  }
+  .portrait img{display:block; width:100%; height:auto;}
+  .portrait figcaption{
+    margin-top:10px;
+    font-family:"Cinzel", serif;
+    font-size:.66rem; letter-spacing:.32em; text-transform:uppercase;
+    text-align:center; color:#5a4828;
+  }
+  @media (max-width: 700px){
+    .portrait{float:none; width:80%; max-width:280px; margin:0 auto 24px;}
+  }
+
+  /* ------- Misc ------- */
+  .legend{
+    display:flex; flex-wrap:wrap; gap:14px 24px; margin:30px 0 10px;
+    font-size:.85rem; color:var(--ink-dim);
+  }
+  .legend .swatch{display:inline-block; width:14px; height:14px; margin-right:8px; vertical-align:-2px;}
+  .legend .narr{background:transparent; border:1px solid var(--ink-soft);}
+  .legend .dial{background:linear-gradient(90deg, rgba(201,169,97,.4), transparent); border-left:2px solid var(--gold);}
+  .legend .thot{background:transparent; border:none; color:#9bb3c9; font-style:italic; text-align:center; width:auto; height:auto; padding:0 6px; vertical-align:baseline;}
+  .legend .carn{background:#3a2e24; border:1px solid rgba(201,169,97,.4);}
+
+  .drop::first-letter{
+    font-family:"Cinzel", serif; font-size:3.2em; line-height:.85; float:left;
+    padding:6px 10px 0 0; color:var(--gold);
+  }
+
+  hr.fleuron{
+    border:none; text-align:center; margin:48px 0; color:var(--gold-soft);
+    font-size:.9rem; letter-spacing:.4em;
+  }
+  hr.fleuron::before{content:"❦  ❦  ❦";}
+
+  footer{
+    border-top:1px solid var(--rule); margin-top:80px; padding:40px 0;
+    color:var(--ink-dim); font-size:.85rem; text-align:center; letter-spacing:.2em; text-transform:uppercase;
+  }
+
+  @media (max-width: 900px){
+    .wrap{grid-template-columns: 1fr;}
+    aside.nav{
+      position:relative; height:auto; border-right:none;
+      border-bottom:1px solid var(--rule);
+      padding:24px 20px;
+    }
+    main{padding:40px 22px;}
+    .hero .eye{display:none}
+    .hero{min-height:auto; padding:40px 0 60px}
+  }
+
+  aside.nav::-webkit-scrollbar{width:6px}
+  aside.nav::-webkit-scrollbar-thumb{background:var(--gold-soft); border-radius:3px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <aside class="nav">
+    <div class="brand">Ley Vaelric-Farlier</div>
+    <ol>
+      <li><a href="#identite">Identité</a></li>
+      <li>
+        <a href="#vecu">Vécu du personnage</a>
+        <ul class="sub">
+          <li><a href="#enfance">Enfance chez les Farlier</a></li>
+          <li><a href="#depart">Le départ</a></li>
+          <li><a href="#manoir">Le manoir principal</a></li>
+          <li><a href="#annonce">L'annonce</a></li>
+          <li><a href="#selection">La sélection de l'héritier</a></li>
+          <li><a href="#heritiere">L'héritière</a></li>
+          <li><a href="#troisp">???</a></li>
+          <li><a href="#audela">L'au-delà</a></li>
+        </ul>
+      </li>
+      <li><a href="#mentalite">Mentalité</a></li>
+      <li><a href="#apparence">Apparence</a></li>
+      <li><a href="#capacites">Capacités du personnage</a></li>
+    </ol>
+  </aside>
+
+  <main>
+
+    <header class="hero">
+      <div class="kicker">Fiche de personnage</div>
+      <h1>Ley Vaelric<span style="color:var(--gold-soft)">-</span>Farlier</h1>
+      <p class="epithet">— L'Apocryphe —</p>
+      <blockquote class="epigraph">
+        Si toute ma vie, je m'efforçais à ne pas la faire brûler trop fort, jusqu'à un point où elle s'était presque éteinte… Ce jour-là, tout s'était enflammé. La bougie, la cire, la table où elle se trouvait, la pièce entière, le manoir. Tout mon corps fut consumé dans ce feu.
+        <cite>— Carnet de Ley</cite>
+      </blockquote>
+
+      <div class="legend" style="margin-top:48px">
+        <span><span class="swatch narr"></span>Narration</span>
+        <span><span class="swatch dial"></span>Dialogue</span>
+        <span><em style="color:#9bb3c9; font-style:italic; margin-right:6px;">⁂ pensée ⁂</em>Pensée intérieure</span>
+        <span><span class="swatch carn"></span>Carnet de Ley</span>
+      </div>
+    </header>
+
+    <!-- ============ IDENTITÉ ============ -->
+    <section id="identite">
+      <div class="label">I · Identité</div>
+      <h2>Identité</h2>
+
+      <div class="id-grid">
+        <div class="field"><span class="k">Nom et prénom</span><span class="v">Ley Vaelric-Farlier<small>Composition : Vaelric étant le nom de la famille, et Farlier le nom du manoir donné à la branche cadette d'où provient Ley. Le nommage des membres des branches secondaires se fait ainsi, afin de pouvoir distinguer les familles entre elles.</small></span></div>
+        <div class="field"><span class="k">Surnoms</span><span class="v">L'Apocryphe<small>Surnom donné par les membres de la famille Vaelric à la fin des événements narrés dans l'histoire.</small></span></div>
+        <div class="field"><span class="k">Sexe</span><span class="v">C'est un homme.</span></div>
+        <div class="field"><span class="k">Âge</span><span class="v">25 ans.</span></div>
+        <div class="field"><span class="k">Origine</span><span class="v">Il est un Sisyphe, du Clan Sensō</span></div>
+        <div class="field"><span class="k">Classe sociale</span><span class="v">Noble</span></div>
+        <div class="field"><span class="k">Allégeance</span><span class="v">L'Oeil</span></div>
+        <div class="field"><span class="k">Rang</span><span class="v">2</span></div>
+        <div class="field"><span class="k">Porte</span><span class="v">1</span></div>
+      </div>
+    </section>
+
+    <!-- ============ VÉCU ============ -->
+    <section id="vecu">
+      <div class="label">II · Vécu du personnage</div>
+      <h2>Vécu du personnage</h2>
+
+      <h3 class="chapter" id="enfance">Enfance chez les Farlier</h3>
+
+      <p class="drop">L'on aurait dit des tambours de guerre. Chaque grondement pénétrait l'enceinte du manoir comme si les murs étaient en un papier. Et lorsqu'ils s'espacèrent occasionnellement, la paix était remplacée par une pluie de flèche s'écrasant contre les tuiles.</p>
+
+      <p>La scène à l'extérieure était digne d'une peinture en grisaille qui avait prit vie. Les flancs de falaises éloignés semblèrent changer de visage au gré des éclairs, tantôt leurs blocs de calcaire émaillés étaient mis à nu pour en révéler chaque affleurement, tantôt leurs ombres regagnaient le ciel nocturne.</p>
+
+      <p>Le paysage devint peu à peu flou, un soupir embua la fenêtre.</p>
+
+      <blockquote class="dialogue"><p>« Jeune maître, le souper est servi. »</p></blockquote>
+
+      <p>Le grincement de la porte suivit d'un léger claquement contrôlé signifia que Ley était à nouveau seul. Un regard agacé balaya la pièce, révélant une chambre éclairée d'un chandelier faiblement de droite à gauche. Au sol, une multitude de jouets d'enfants, cheval à bascule et billes éparpillées, servaient d'obstacle à quiconque souhaitait envahir ce lieu privilégié.</p>
+
+      <p>Plus loin, deux grands lits se faisaient face : L'un avait sa couverture à moitié parterre, et les draps défaits, l'autre ne possédait pas un pli. L'enfant se dirigea vers le lit le plus ordonné, sa démarche agile évitant les soldats de bois qui s'étalaient en chausse-trape. Une fois assit, le regard toujours agacé, Ley s'habilla plus convenablement, avant de se saisir d'un carnet fermé et d'une plume.</p>
+
+      <p>Ses ruminations furent autant agitées que la tempête en mer qu'il vit plus tôt. Chaque vague éclatée, l'équivalent d'une pensée qui se destructurer pour revenir quelques secondes plus tard. Et, comme une ultime solution pour calmer la mer, elle dû prendre vit dans l'encre et forme dans les mots.</p>
+
+      <div class="carnet">
+        <p>tout commence quand Eric le majordome ma coupé dans ma contemplation. je n'ai pas sursauté parce que le tonnerre grondé déjà, mais c'était pareil.</p>
+        <p>Ce qui me génait le plus c'était la chambre. les chevaliers doivent etre debou sur l'étagere, le chevale à bascule doit être tourné sur la droite et reculer de 3 pas pour être à sa place contre le mur. tout est en désordre et je dois, donc, faire attention a ou je met les pieds.</p>
+        <p>Tout ça c'est la faute de béa. c'est ma soeur. jumelle.</p>
+        <p>Elle me colle tout le temps. sauf avant les repas puisqu'elle dit qu'elle est "mature". et du coup elle prépare la table. Moi je dis que on a des servants qui le font. Elle me dit que je comprends pas.</p>
+        <p>Moi de toute façon je voulais pas etre mature. J'aime bien quand elle me laisse seule. Je peux regarder a la fenetre et écouter le bruit de dehors. d'habitude, j-</p>
+      </div>
+
+      <blockquote class="dialogue"><p>« À table !!! »</p></blockquote>
+
+      <p>La porte s'ouvrit avec fracas, incrustant davantage encore la marque noire de la poignée dans le pan de mur rosâtre. Une jeune fille aux cheveux noirs se tenait sur le pas de la porte, un large sourire égayant son visage. Elle repartit presque immédiatement en courant, et l'on pu deviner au bruit de ses pas qu'en quelques secondes, elle était déjà loin. D'autres paroles résonnèrent, maintenant que la porte était ouverte.</p>
+
+      <blockquote class="dialogue"><p>« Béatrice ! Combien de fois t'ai-je dis de ne pas courir dans les escaliers ! »</p></blockquote>
+
+      <p>Le carnet se ferma dans un autre soupir.</p>
+
+
+      <h3 class="chapter" id="depart">Le départ</h3>
+
+      <blockquote class="dialogue"><p>« Et surtout, vous devez garder en tête que vos faits et gestes représentent notre famille Farlier. »</p></blockquote>
+
+      <p>Deux voix répondirent en une intonation commune.</p>
+
+      <blockquote class="dialogue"><p>« Oui, mère ! »</p></blockquote>
+
+      <p>Ley se tenait droit, comme le voulait l'éthique. Sa soeur jumelle à ses côtés, elle, s'élança vers leur mère et s'agrippa à sa taille, ses pleurs résonnaient dans le grand hall.</p>
+
+      <blockquote class="dialogue"><p>« Ça va aller mes enfants… Nous allons nous revoir.. »</p></blockquote>
+
+      <p>Un sourire triste habillait les mots de sa mère.<br/>Ses yeux, eux, étaient habillés d'un voile de mensonge qui faisaient miroités quelques larmes avalées.</p>
+
+      <p>Ley baissa la tête en regardant le sol, toujours droit comme un piquet.<br/>D'ailleurs, son nez le piquait.</p>
+
+      <p>Une grande main secoua ses cheveux coiffés.</p>
+
+      <blockquote class="dialogue"><p>« Ça ira. Aller, ne nous faisons pas attendre. »</p></blockquote>
+
+      <p>Ley leva les yeux vers son père. Il hocha la tête, reniflant un grand coup, avant monter à bord de la calèche.</p>
+
+
+      <h3 class="chapter" id="manoir">Le manoir principal</h3>
+
+      <div class="thought"><p>Tien, la tempête approche.</p></div>
+
+      <p>Le regard scrutant l'extérieur, Ley entendit les tapottements irréguliers sur la vitre croître de plus en plus. La pluie n'allait plus tarder à s'abattre.</p>
+
+      <div class="thought"><p>Béa a prévu de sortir explorer les bois. Elle devrait abandonner.</p></div>
+
+      <p>L'oeil se décala légèrement sur le carreau le plus bas de la vitre, à droite.</p>
+
+      <div class="thought"><p>Elle ne le fera pas. C'est un défi d'Aurore.</p></div>
+
+      <p>Un instant de flottement suivi, où son regard dériva sur la gauche.</p>
+
+      <div class="thought"><p>J'aime bien Aurore. Mais elle est populaire, donc je l'aime un peu moins.</p></div>
+
+      <p>Soudainement, un claquement brutal fit sursauter le jeune garçon.</p>
+
+      <blockquote class="dialogue"><p>« On se concentre, Ley ! »</p></blockquote>
+
+      <p>L'homme qui posa un regard sévère sur l'enfant était habillé d'une robe longue et noire qui se clôturait d'un chaperon, actuellement tombant sur son dos. Il s'agissait de l'un des précepteurs du manoir.</p>
+
+      <p>La leçon du jour parlait du troisième grand chef de la maison. Ou du cinquième.</p>
+
+      <blockquote class="dialogue"><p>« Oui, mes excuses. »</p></blockquote>
+
+      <p>Le cours continua, Ley ne soupira pas.</p>
+
+
+      <h3 class="chapter" id="annonce">L'annonce</h3>
+
+      <p>Le claquement sec et répétitif de talons résonnèrent dans cette pièce presque vide.</p>
+
+      <p>Un long couloir, un tapis rouge, quelques marches, un grand siège central. Des piliers gravés qui remontaient bien trop haut pour pouvoir distinguer où ils partaient sans lever la tête.</p>
+
+      <p>Non, il était hors de question qu'il ne bouge d'un millimètre. À cet instant, lui comme les autres, étaient figés comme des soldats de bois ordonnés sur l'étagère.</p>
+
+      <p>Face au groupe d'enfants composés de treize personnes, marchait calmement un homme adulte. De longs cheveux noirs pendaient dans son dos, et son regard, de même teinte, ne semblait pas les voir. Pourtant, sa bouche s'ouvrit. Une voix froide remplit le silence entre les tambours.</p>
+
+      <blockquote class="dialogue"><p>« Il est temps pour la sélection de commencer. »</p></blockquote>
+
+      <p>Ces mots firent frémir les enfants. Tous le savaient, et pourtant, entendre ce terme de la voix de leur chef de maison ne pouvait les laisser de marbre.</p>
+
+      <p>Pourtant, aucun ne flancha.</p>
+
+      <blockquote class="dialogue"><p>« Comme vous le savez, il n'y a de la place que pour un seul héritier. »</p></blockquote>
+
+      <p>Les autres n'auront leur place nul part ailleurs.</p>
+
+      <blockquote class="dialogue"><p>« Faites le nécessaire pour l'élire. »</p></blockquote>
+
+      <p>Seul le plus fort restera en vie.</p>
+
+      <blockquote class="dialogue"><p>« Vous connaissez la seule règle. »</p></blockquote>
+
+      <p>Rien ne peut être tenté en présence des adultes.</p>
+
+      <blockquote class="dialogue"><p>« Mais ne vous reposez pas trop sur elle. »</p></blockquote>
+
+      <p>Car les adultes, eux-aussi, finiront par disparaître.</p>
+
+      <blockquote class="dialogue"><p>« Vous pouvez disposer. »</p></blockquote>
+
+      <p>Adieu.</p>
+
+      <blockquote class="dialogue"><p>« Montrez moi qui sera digne de me succéder. »</p></blockquote>
+
+
+      <h3 class="chapter" id="selection">La sélection de l'héritier</h3>
+
+      <div class="carnet">
+        <p>Six années, quatre mois, deux jours et.. Seize heures sont passées, depuis le commencement de la sélection de l'héritier.</p>
+        <p>Presque huit personnes ont été éliminées. La moitié par nous.</p>
+        <p>La cheffe des domestiques a complimenté ses nouvelles chaussures volées.<br/>Le cuisinier lui a donné trois morceaux de pain.</p>
+        <p>C'est maigre.</p>
+      </div>
+
+      <p>Ley leva le regard un instant de son carnet. Ils étaient dans l'une des classes. Lui, était assit à la table du professeur. Dans un coin de la pièce, se trouvait une enfant attachée. Face à elle, Béa faisait les cent pas, en prononçant quelques mots tranchants.</p>
+
+      <blockquote class="dialogue"><p>« Tu vas me répondre, connasse ? J'ai besoin de toutes les conversations que tu as eu avec les adultes, ces trois derniers mois. »</p></blockquote>
+
+      <p>Quelques mots sortirent de la bouche de l'enfant. Déformés par les contusions à la mâchoire.</p>
+
+      <blockquote class="dialogue"><p>« A quhoi bhon.. Fihnis-en.. Pihié… »</p></blockquote>
+
+      <p>Béa tourna son regard vers son frère, comme en l'attente d'une réponse. Ce dernier, tout en replongeant le regard dans son carnet, lui répondit.</p>
+
+      <blockquote class="dialogue"><p>« Il nous faut plus d'informations, Aurore. C'est pas contre toi. »</p></blockquote>
+
+      <div class="carnet">
+        <p>J'aimais bien Aurore, quand j'étais plus jeune.</p>
+        <p>En fait, je l'aime sûrement toujours.</p>
+        <p>Mais l'amour est une faiblesse.</p>
+      </div>
+
+      <p>Ley resta statique sur le point de fin de sa phrase, l'encre commençant à imbiber la feuille. Lorsqu'il reprit conscience, il leva d'urgence son stylo, avant de soupirant.</p>
+
+      <blockquote class="dialogue"><p>« Ma feuille est illisible à cause de toi. Je vais devoir reprendre le compte depuis le début. »</p></blockquote>
+
+      <blockquote class="dialogue"><p>« Non.. non.. Pihié.. »</p></blockquote>
+
+
+      <h3 class="chapter" id="heritiere">L'héritière</h3>
+
+      <blockquote class="dialogue"><p>« À nous. »</p></blockquote>
+
+      <blockquote class="dialogue"><p>« À nous. »</p></blockquote>
+
+      <p>Le tintement de cristal retentit dans la cuisine.</p>
+
+      <p>Ley porta le liquide rouge à ses lèvres, grimaçant légèrement avant de poser le verre sur la table de travail où il était assit. En face de lui, sur une cuisinière, se trouvait sa soeur, Béa. Son verre fut lancée au loin, et brisé contre un mur.</p>
+
+      <blockquote class="dialogue"><p>« Raah, le goût est dégueux. Comment les adultes peuvent boire ça ? »</p></blockquote>
+
+      <blockquote class="dialogue"><p>« J'imagine qu'ils doivent s'y habituer avec le temps… »</p></blockquote>
+
+      <p>Autour d'eux, la cuisine était dans un état lamentable. Les légumes étalés au sol, les ustensiles éparpillés sur les différentes tables de travail. Au loin, la porte était fracturée et à moitié tombée, pendouillant en diagonal dans le vide. La grande table de la salle à manger qui se révélait, possédait elle-aussi des traces de lutte évidente.</p>
+
+      <blockquote class="dialogue"><p>« Il était résistant, celui-là. Pas vrai, Béa ? »</p></blockquote>
+
+      <p>Cette dernière asquieça, sans un mot. Elle avait son regard perdu vers la fenêtre derrière son frère.</p>
+
+      <blockquote class="dialogue"><p>« Bah, qu'est-ce qu'il y a ? Tu n'es pas contente ? On va pouvoir enfin prendre sa place. »</p></blockquote>
+
+      <p>La place de chef de famille. Tous eux pourront le faire tomber. Il ne peut y avoir qu'un seul héritier, mais il y a toujours deux chefs de maison. Pourquoi pas eux ?</p>
+
+      <blockquote class="dialogue"><p>« Notre plan est parfait, on a toutes les informations qu'il nous faut. Ce soir, on frappe. »</p></blockquote>
+
+      <blockquote class="dialogue"><p>« Ley ?... »</p></blockquote>
+
+      <blockquote class="dialogue"><p>« Oui ? »</p></blockquote>
+
+      <blockquote class="dialogue"><p>« Il pleut. »</p></blockquote>
+
+      <blockquote class="dialogue"><p>« Et alors ? Ça ne change rien à nos plans. »</p></blockquote>
+
+      <blockquote class="dialogue"><p>« Tu as toujours aimé la pluie. »</p></blockquote>
+
+      <blockquote class="dialogue"><p>« Je.. Béa ? »</p></blockquote>
+
+      <blockquote class="dialogue"><p>« Hmm ?.. »</p></blockquote>
+
+      <blockquote class="dialogue"><p>« Pour..quoi je.. »</p></blockquote>
+
+      <blockquote class="dialogue"><p>« Je te jure que c'est le moins douloureux… »</p></blockquote>
+
+      <blockquote class="dialogue"><p>« Pour..quoi ?»</p></blockquote>
+
+      <p>Le verre tomba au sol et s'éclata. Un corps s'affaisca sur le plan de travail.</p>
+
+      <blockquote class="dialogue"><p>« Nous ne sommes pas de taille contre le chef… Pas encore. »</p></blockquote>
+
+      <p>Plus aucune réponse.</p>
+
+      <blockquote class="dialogue"><p>« Je te vengerai. »</p></blockquote>
+
+
+      <h3 class="chapter" id="troisp">???</h3>
+
+      <p>Cinq années passèrent.</p>
+
+      <p>Béa fut nommée héritière, et prit le contrôle de la Maison Vaelric en compagnie du précédent héritier.</p>
+
+      <p>Tous deux sont destinés à régner sur la maison Vaelric jusqu'à ce que l'héritier aîné ne meure, et qu'une nouvelle sélection ne se déroule pour nommer l'héritier qui secondera Béa.</p>
+
+      <p>Mais pour l'heure, les deux avaient une longue vie devant eux.</p>
+
+      <p>Dans une grande salle, un enfant se baladait, évitant les jambes d'adultes qui passèrent sans le remarquer. Il passa à côté d'une grande harpe dont les cordes étaient habilement jouée par deux servants.</p>
+
+      <p>L'enfant vint enfin à destination. Ses deux petits bras, tentèrent de saisir les bas de sa mère.</p>
+
+      <blockquote class="dialogue"><p>« Que fais-tu encore levé à cette heure, Ley ? »</p></blockquote>
+
+      <p>Des main tendres vinrent lever l'enfant jusqu'à le poser sur ses genoux. Son regard, faussement contrarié, semblèrent jouer avec ceux de l'enfant, qui rigolait.</p>
+
+      <blockquote class="dialogue"><p>« Aller, donne moi ton hochet. »</p></blockquote>
+
+      <p>La jeune femme aux longs cheveux noirs prit le hochet de naissance, un anneau de dentition au manche en or au bout duquel était fixé un morceau de corail rouge. La dureté et la fraîcheur du corail aidait les bébés à percer leurs dents. Elle trempa la sucette dans son verre de vin, avant de le donner à nouveau à son enfant, une pratique courante pour aider les jeunes à s'endormir.</p>
+
+      <blockquote class="dialogue"><p>« Idola, s'il te plaît. Vas coucher Ley. »</p></blockquote>
+
+      <p>La servante qui passait sourit à la maîtresse de maison, et prit le jeune garçon dans ses bras avant de monter à l'étage.</p>
+
+      <p>Quelques heures passèrent, et les invités étaient tous arrivés. Le bal masqué pouvait commencer.</p>
+
+      <p>Les deux maîtres de maison inaugurèrent le bal d'une danse en duo. Une jeune femme et un homme plus vieux se teinrent et commençèrent une valse, dont chaque pas était chorégraphié parfaitement.</p>
+
+      <p>À la fin de la valse, tout le public se mit à applaudir, avant que certains ne se mettent à table, et d'autres à danser.</p>
+
+      <p>De nouveau assise en bout de table avec son compagnon, Béa entendit l'homme avec qui elle avait dansé lui murmurer quelques mots.</p>
+
+      <blockquote class="dialogue"><p>« Belle danse. »</p></blockquote>
+
+      <p>Alors qu'elle préservait un sourire aimable et commençait à manger.</p>
+
+      <blockquote class="dialogue"><p>« Ne me parle pas, vieil homme. »</p></blockquote>
+
+      <p>Un petit rire fut entendu.</p>
+
+      <blockquote class="dialogue"><p>« Tu m'en veux toujours. Je savais qu'autoriser exceptionnellement deux jumeaux n'était pas l'idée du siècle. »</p></blockquote>
+
+      <p>Béa s'empressa de réponre.</p>
+
+      <blockquote class="dialogue"><p>« Le jour viendra où je.. je. »</p></blockquote>
+
+      <p>Elle se tint la gorge, tout en se levant brusquement. Experte en poison, elle pouvait reconnaître de telles méthodes entre mille. Pourtant, elle était aussi la plus prudente à ce sujet. Chaque met avait été traité, et surveillé, et elle ne mangeait rien qu'elle n'avait pas surveillé elle-même.</p>
+
+      <p>En un instant, l'intégralité de la soirée se déroula au travers du voile de ses yeux. Et elle ne vit qu'une seule scène, qu'elle ne voulait croire.</p>
+
+      <blockquote class="dialogue"><p>« L.. Ley ! »</p></blockquote>
+
+      <p>Alors qu'elle ne pouvait plus respirer, elle voulu faire un pas de côté pour se diriger en trombe vers l'escalier, bousculant les invités. Au détour d'un couloir, se trouvait le pas de l'escalier. Quelques mètres plus haut, la chambre de son fils.</p>
+
+      <p>Mais une silhouette qui la laissa sans voix et la fit perdre l'équilibre à tel point qu'elle tomba en arrière, se trouvait au pas de l'escalier de bois.</p>
+
+      <blockquote class="dialogue"><p>« Si tes performances n'ont pas diminuées, tu devrais pouvoir tenir encore 2 minutes et 23 secondes avant de t'évanouir. »</p></blockquote>
+
+      <p>Ce visage, cette voix. Elle ne pouvait pas être trompée, les larmes lui montèrent au visage. C'était son frère, revenu d'entre les morts.</p>
+
+      <blockquote class="dialogue"><p>« J'aimerai bien répondre à tes questions, mais il te reste peu de temps. Encore moins à ton enfant. »</p></blockquote>
+
+      <p>L'homme sorti de sa poche un flacon.</p>
+
+      <blockquote class="dialogue"><p>« Tiens ta promesse, et tue-le. »</p></blockquote>
+
+      <p>Fit-il en regardant en direction du mur derrière lequel se trouvait la salle de cérémonie.</p>
+
+      <blockquote class="dialogue"><p>« Et je sauverai "Ley". Quelle blague de mauvais goût, soit dit en passant. »</p></blockquote>
+
+      <p>En ce jour, les chefs de maisons succombèrent tous deux. L'un asphyxié par poison, l'autre poignardé.</p>
+
+      <p>Les registres familliaux parlèrent d'une haine entre les deux chefs de maison qui ne pouvait être résolu autrement que par le sang, et qu'ils se battirent lors d'une réception publique, mais que tous deux trouvèrent la mort.</p>
+
+
+      <h3 class="chapter" id="audela">L'au-delà</h3>
+
+      <p>Ley était assit au bord d'une falaise, sa main tenant un flacon rempli. Il vida son contenu dans l'océan.</p>
+
+      <p>L'air frais de la mer n'était pas désagréable aujourd'hui. Les rayons du soleil traversaient les nuages blancs et réchauffaient la peau.</p>
+
+      <p>C'était une belle journée.<br/>La nuit dernière était éreintante.</p>
+
+      <p>Celui qui fut un petit garçon adorant la pluie, se leva, et s'approcha du bord. Son regard fixait l'horizon.</p>
+
+      <p>Il se souvint de la sélection.<br/>À l'époque, il avait trouvé cela dérisoire.<br/>S'inoculer une faible quantité des poisons favoris de sa soeur, chaque nuit.<br/>Mais il devait couvrir toutes les éventualités. C'était ce qu'on lui avait apprit.<br/>Même celles qu'il ne pouvait imaginer.<br/>Aujourd'hui, il sourit.</p>
+
+      <blockquote class="dialogue"><p>« Quel garçon naïf. »</p></blockquote>
+
+      <p>Le regard baissé vers la rive en contre-bas. Les vagues s'éclataient encore contre la roche.</p>
+
+      <p>Son lui d'avant s'était prémuni contre le pire.<br/>Mais il était encore trop irréfléchi.<br/>Certes, il a survécu, mais après ?</p>
+
+      <p>Après, il aurait dû vivre parmi les rats, à mendier un morceau de pain.<br/>Le visage toujours caché, la tête toujours baissée.</p>
+
+      <p>Ce n'était pas une vie.</p>
+
+      <p>Alors il préféra clôturer cette histoire.<br/>Les traqueurs de sa famille ne tarderont certainement pas à remonter sa trace.<br/>Il ne lui restait plus qu'un pas pour échapper à cette réalité.</p>
+
+      <p>Il n'était pas triste, ni en colère.<br/>Il était calme.<br/>Cela faisait bien longtemps, qu'il l'avait accepté.<br/>Sa vie s'était terminée, ce jour-là.<br/>Étalé dans la cuisine, comme un idiot.</p>
+
+      <p>Soudain, une voix l'interpela.</p>
+
+      <blockquote class="dialogue"><p>« Ley Vaelric-Farlier. »</p></blockquote>
+
+      <p>Il ne connaissait pas toutes les voix des membres de sa famille, cependant le retrouver si rapidement lui paraissait assez étrange tout de même. Il se tourna lentement.</p>
+
+      <p>Devant lui se trouvait un visage caché d'un masque portant un Oeil.</p>
+
+      <blockquote class="dialogue"><p>« Acceptes-tu de dédier ta vie à la couronne ? »</p></blockquote>
+
+      <p>Un oeil. La couronne. Les associations de pensées furent immédiates. Il se remémora les nombreuses rumeurs autour de cette faction. Certains parlaient d'humains élevés en laboratoire. D'autres de lavage de cerveau, d'autres encore d'un clan mystérieux habitant hors de la vue du monde.</p>
+
+      <p>Ley s'approcha de l'homme d'un pas. Il tint sa main droite sur son coeur, avant de plier le dos. Un sourire se dessinant sur son visage.</p>
+
+      <blockquote class="dialogue"><p>« Ce serait un honneur. »</p></blockquote>
+    </section>
+
+
+    <!-- ============ MENTALITÉ ============ -->
+    <section id="mentalite">
+      <div class="label">III · Mentalité</div>
+      <h2>Mentalité</h2>
+
+      <div class="carnet">
+        <p>J'étais autrefois un enfant débordant de sentiments que je m'efforçais de cacher dans mon carnet.</p>
+        <p>Au fil du temps, j'ai appris à les canaliser d'une manière plus efficace. Lors de la Sélection, j'appris que la haine, l'amour, l'amitié.. Tout cela faussait les chances de survie.</p>
+        <p>Mais, même à l'époque, ce n'était qu'une solution temporaire. J'aurais fini par craquer, peut-être par sombrer dans la folie.</p>
+        <p>Mais un événement clôtura définitivement la porte à ces faiblesses.</p>
+        <p>Bien sûr, sur le moment, ce fut une tragédie qui m'inonda de toutes les émotions que j'avais enfoui auparavant. Le jour où ma propre soeur m'eut trahi.</p>
+        <p>Ce que je ressentais m'avait fait sortir de mon propre corps. Comme une sorte de projection astrale ? A moins que ce ne soit que les hallucinations dû à la douleur du poison. J'ai peu de souvenirs de cet instant, mais il s'avère que j'ai réussi à extirper mon corps, à le cacher, et à attendre le bon moment pour me venger.</p>
+        <p>J'aime bien prendre la métaphore d'une flamme de bougie.</p>
+        <p>Si toute ma vie, je m'efforçais à ne pas la faire brûler trop fort, jusqu'à un point où elle s'était presque éteinte… Ce jour-là, tout s'était enflammé. La bougie, la cire, la table où elle se trouvait, la pièce entière, le manoir. Tout mon corps fut consumé dans ce feu.</p>
+        <p>Avec le recul, c'est une bénédiction.</p>
+      </div>
+
+      <hr class="fleuron"/>
+
+      <p style="font-family:'Cinzel',serif; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); font-size:.95rem; text-align:center; margin-bottom:1.4em;">Qui suis-je aujourd'hui ?</p>
+
+      <div class="carnet">
+        <p>Un homme intelligent, délié des chaînes du hasard.<br/>Je ne laisse aucune variable inconnue m'atteindre.<br/>Tout n'est que calcul, et je me dois d'être le plus grand mathématicien.</p>
+        <p>Si ma maison m'a appris quelque chose, c'est à survivre à tout prix.<br/>Je suis peut-être le joyau caché de notre devise.<br/>Mais je n'ai aucun intérêt à le leur dévoiler.</p>
+      </div>
+    </section>
+
+
+    <!-- ============ APPARENCE ============ -->
+    <section id="apparence">
+      <div class="label">IV · Apparence</div>
+      <h2>Apparence</h2>
+
+      <figure class="portrait">
+        <img src="Image%20Ley.png" alt="Portrait de Ley Vaelric-Farlier" />
+        <figcaption>Ley Vaelric-Farlier</figcaption>
+      </figure>
+
+      <p>Ley n'a rien de particulier, bien que son visage soit assez lisse, il est tout à fait ordinaire.</p>
+
+      <p>Ses yeux sont les seuls traits distinctfs. Le noir de ses iris noie sa pupille, un trait commun aux membres de sa famille, qui donne un regard plus profond. Peut-être est-e aussi le reflet de son vécu, mais cette profondeur fait parfois froid dans le dos. Cependant, le sourire de Ley qui s'en-suit de cette sensation efface les doutes.</p>
+
+      <p>Ses longs cheveux noirs atteignent le bas de son dos. Ils sont lisses et bien entretenus.</p>
+
+      <p>Ley est souvent habillé de vêtements simples sans couleurs extravagantes.</p>
+
+      <p>Quant à son comportement, il semble relativement normal, bien que souvent calme. Quelque chose qui inspire la confiance émane de ses gestes.</p>
+    </section>
+
+
+    <!-- ============ CAPACITÉS ============ -->
+    <section id="capacites">
+      <div class="label">V · Capacités du personnage</div>
+      <h2>Capacités du personnage</h2>
+
+      <div class="aspect-card">
+        <h4>Aspect</h4>
+        <div class="needles">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <p>L'aspect de Ley est un ensemble de 8 aiguilles de lancer. Forgées dans un acier trifondu épuré de toute impureté par trois passes successives au fourneau, elles atteignent une dureté que la plupart des lames de guerre peinent à égaler. Les aiguilles sont légèrement bleutées, symbole de la haute teneur en carbone qu'un forgeron averti pourra reconnaître du premier coup d'oeil.</p>
+        <p>Des torsades dorés sont gravés dans le manche en bois d'ébène, renfermant le seau de la famille Vaelric.</p>
+      </div>
+
+      <div class="aspect-card">
+        <h4>Sort de l'aspect</h4>
+        <p style="font-family:'Cinzel',serif; letter-spacing:.2em; color:var(--gold); font-size:.95rem; text-transform:uppercase;">Point d'ancrage</p>
+        <p>Ce sort permet aux aiguilles, lorsqu'elles sont plantées dans un objet, de se verrouiller dans l'espace. Ainsi, elle se "cloue" à la réalité, et est capable de supporter jusqu'à une certaine force avant de ne plus être clouée, dépendant de la porte utilisée.</p>
+
+        <div class="example">
+          <b>Exemple</b>
+          Une personne attaque avec une hache à deux mains Ley. Ce dernier envoie une aiguille qui doit se loger dans le manche de l'arme. L'aiguille se verrouille, et l'arme à deux mains se retrouve "bloquée" au-dessus de Ley. La pression exercée ne permet pas à l'aiguille de transpercer le manche, simplement de s'y enfoncer, et empêche l'arme de continuer sa trajectoire.
+        </div>
+
+        <div class="example">
+          <b>Deuxième exemple</b>
+          Ley lance une aiguille qui se plante contre les vêtements en cuir d'une personne qui court vers lui. L'aiguille se verrouille, et transperce le vêtement par l'inertie de la course, jusqu'à se loger dans le ventre de l'individu.
+        </div>
+
+        <h4 style="margin-top:24px">Limites envisageables</h4>
+        <ul style="padding-left:1.2em; color:var(--ink-soft)">
+          <li>Déterminer le nombre d'aiguilles capable d'être verrouillées simultanément.</li>
+          <li>Déterminer la résistance nécessaire avant que le verrouillage ne puisse plus s'effectuer.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      Ley Vaelric-Farlier · L'Apocryphe · Au service de l'Œil
+    </footer>
+
+  </main>
+</div>
+
+<div class="floating-player" id="fp" aria-label="Musique d'ambiance">
+  <div class="fp-head">
+    <span class="dot"></span>
+    <span class="fp-title">Thème de Ley</span>
+  </div>
+  <div class="fp-controls">
+    <button class="fp-btn" id="fpPlay" aria-label="Lecture / Pause">
+      <svg id="fpIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+    <div class="fp-time">
+      <div class="fp-progress" id="fpProgress"><div class="fp-progress-fill" id="fpFill"></div></div>
+      <div class="fp-times"><span id="fpCur">0:00</span><span id="fpDur">0:00</span></div>
+    </div>
+    <button class="fp-loop active" id="fpLoop" aria-label="Lecture en boucle" title="Boucle activée">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+    </button>
+  </div>
+  <div class="fp-volume">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+    <input type="range" id="fpVol" min="0" max="1" step="0.01" value="0.7" aria-label="Volume" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+  </div>
+  <audio id="fpAudio" src="Hollow%20Knight%20-%20Sealed%20Vessel%20-%20Path%20of%20Pain%20Music.mp3" loop preload="metadata"></audio>
+</div>
+
+<script>
+  (function(){
+    const fp = document.getElementById('fp');
+    const audio = document.getElementById('fpAudio');
+    const btn = document.getElementById('fpPlay');
+    const icon = document.getElementById('fpIcon');
+    const progress = document.getElementById('fpProgress');
+    const fill = document.getElementById('fpFill');
+    const curEl = document.getElementById('fpCur');
+    const durEl = document.getElementById('fpDur');
+    const loopBtn = document.getElementById('fpLoop');
+
+    const PLAY = '<path d="M8 5v14l11-7z"/>';
+    const PAUSE = '<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>';
+
+    const fmt = s => {
+      if (!isFinite(s)) return '0:00';
+      const m = Math.floor(s/60), sec = Math.floor(s%60);
+      return m + ':' + (sec<10?'0':'') + sec;
+    };
+
+    btn.addEventListener('click', () => {
+      if (audio.paused) audio.play(); else audio.pause();
+    });
+    audio.addEventListener('play', () => {
+      icon.innerHTML = PAUSE;
+      fp.classList.add('playing');
+    });
+    audio.addEventListener('pause', () => {
+      icon.innerHTML = PLAY;
+      fp.classList.remove('playing');
+    });
+    audio.addEventListener('loadedmetadata', () => {
+      durEl.textContent = fmt(audio.duration);
+    });
+    audio.addEventListener('timeupdate', () => {
+      const p = (audio.currentTime / audio.duration) * 100 || 0;
+      fill.style.width = p + '%';
+      curEl.textContent = fmt(audio.currentTime);
+    });
+    progress.addEventListener('click', (e) => {
+      const rect = progress.getBoundingClientRect();
+      const ratio = (e.clientX - rect.left) / rect.width;
+      if (isFinite(audio.duration)) audio.currentTime = ratio * audio.duration;
+    });
+    loopBtn.addEventListener('click', () => {
+      audio.loop = !audio.loop;
+      loopBtn.classList.toggle('active', audio.loop);
+      loopBtn.title = audio.loop ? 'Boucle activée' : 'Boucle désactivée';
+    });
+
+    const vol = document.getElementById('fpVol');
+    audio.volume = parseFloat(vol.value);
+    vol.addEventListener('input', () => { audio.volume = parseFloat(vol.value); });
+  })();
+</script>
+
+<script>
+  const links = document.querySelectorAll('aside.nav a[href^="#"]');
+  const map = new Map();
+  links.forEach(a => {
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) map.set(el, a);
+  });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      const a = map.get(e.target);
+      if (!a) return;
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+  map.forEach((_, el) => obs.observe(el));
+</script>
+
+</body>
+</html>
